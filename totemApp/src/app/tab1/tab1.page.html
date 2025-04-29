@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Cliente
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Selecione o tipo de Atendimento:</ion-card-title>
+    </ion-card-header>
+  
+
+    <ion-card-content>
+      <ion-button (click)="abrirAlertaPrioritaria()" color="warning" expand="block">Senha Prioritária</ion-button>
+      <ion-alert
+        [isOpen]="isAlertPrioritariaOpen"
+        header="Senha N°{{ senhaPrioritaria }}"
+        subHeader="tipo de senha: Senha Prioritária"
+        message="Seu número será chamado em instantes."
+        [buttons]="alertButtons"
+        (didDismiss)="isAlertPrioritariaOpen = false"
+      ></ion-alert>
+
+      <ion-button (click)="abrirAlertaGeral()" color="primary" expand="block">Senha Geral</ion-button>
+      <ion-alert
+        [isOpen]="isAlertGeralOpen"
+        header="Senha N°{{senhaGeral}}"
+        subHeader="Tipo de senha: Senha Geral"
+        message="Seu número será chamado em instantes."
+        [buttons]="alertButtons"
+        (didDismiss)="isAlertGeralOpen = false"
+      ></ion-alert>
+
+      <ion-button (click)="abrirAlertaExames()" color="success" expand="block">Retirada de Exames</ion-button>
+      <ion-alert
+        [isOpen]="isAlertExamesOpen"
+        header="Senha N°{{retiradaExames}}"
+        subHeader="Tipo de senha: Retirada de exames"
+        message="Seu número será chamado em instantes."
+        [buttons]="alertButtons"
+        (didDismiss)="isAlertExamesOpen = false"
+      ></ion-alert>
+      
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
