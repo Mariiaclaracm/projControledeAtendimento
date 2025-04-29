@@ -18,10 +18,37 @@
       <ion-card-title>Selecione o tipo de Atendimento:</ion-card-title>
     </ion-card-header>
   
+
     <ion-card-content>
-      <ion-button expand="block" color="warning">Senha Prioritária</ion-button>
-      <ion-button expand="block" color="primary">Senha Geral</ion-button>
-      <ion-button expand="block" color="success">Retirada de Exames</ion-button>
+      <ion-button (click)="setOpen(true)" color="warning" expand="block">Senha Prioritária</ion-button>
+      <ion-alert
+        [isOpen]="isAlertOpen"
+        header="Senha N°"
+        subHeader="A Sub Header Is Optional"
+        message="Seu número será chamado em instantes."
+        [buttons]="alertButtons"
+        (didDismiss)="setOpen(false)"
+      ></ion-alert>
+      <ion-button (click)="setOpen(true)" color="primary" expand="block">Senha Geral</ion-button>
+      <ion-alert
+        [isOpen]="isAlertOpen"
+        header="A Short Title Is Best"
+        subHeader="A Sub Header Is Optional"
+        message="Seu número será chamado em instantes."
+        [buttons]="alertButtons"
+        (didDismiss)="setOpen(false)"
+      ></ion-alert>
+      <ion-button (click)="setOpen(true)" color="success" expand="block">Retirada de Exames</ion-button>
+      <ion-alert
+        [isOpen]="isAlertOpen"
+        header="A Short Title Is Best"
+        subHeader="A Sub Header Is Optional"
+        message="Seu número será chamado em instantes."
+        [buttons]="alertButtons"
+        (didDismiss)="setOpen(false)"
+      ></ion-alert>
+      
+
     </ion-card-content>
   </ion-card>
 
