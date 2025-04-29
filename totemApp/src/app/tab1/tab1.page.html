@@ -20,7 +20,7 @@
   
 
     <ion-card-content>
-      <ion-button (click)="setOpen(true)" color="warning" expand="block">Senha Prioritária</ion-button>
+      <ion-button id:"botao" (click)="setOpen(true)" color="warning" expand="block">Senha Prioritária</ion-button>
       <ion-alert
         [isOpen]="isAlertOpen"
         header="Senha N°"
@@ -29,7 +29,7 @@
         [buttons]="alertButtons"
         (didDismiss)="setOpen(false)"
       ></ion-alert>
-      <ion-button (click)="setOpen(true)" color="primary" expand="block">Senha Geral</ion-button>
+      <ion-button id:"botao" (click)="setOpen(true)" color="primary" expand="block">Senha Geral</ion-button>
       <ion-alert
         [isOpen]="isAlertOpen"
         header="A Short Title Is Best"
@@ -38,7 +38,7 @@
         [buttons]="alertButtons"
         (didDismiss)="setOpen(false)"
       ></ion-alert>
-      <ion-button (click)="setOpen(true)" color="success" expand="block">Retirada de Exames</ion-button>
+      <ion-button id:"botao" (click)="setOpen(true)" color="success" expand="block">Retirada de Exames</ion-button>
       <ion-alert
         [isOpen]="isAlertOpen"
         header="A Short Title Is Best"
