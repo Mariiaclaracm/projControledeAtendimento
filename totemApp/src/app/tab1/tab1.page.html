@@ -20,32 +20,34 @@
   
 
     <ion-card-content>
-      <ion-button id:"botao" (click)="setOpen(true)" color="warning" expand="block">Senha Prioritária</ion-button>
+      <ion-button (click)="abrirAlertaPrioritaria()" color="warning" expand="block">Senha Prioritária</ion-button>
       <ion-alert
-        [isOpen]="isAlertOpen"
-        header="Senha N°"
-        subHeader="A Sub Header Is Optional"
+        [isOpen]="isAlertPrioritariaOpen"
+        header="Senha N° 333"
+        subHeader="tipo de senha: Senha Prioritária"
         message="Seu número será chamado em instantes."
         [buttons]="alertButtons"
-        (didDismiss)="setOpen(false)"
+        (didDismiss)="isAlertPrioritariaOpen = false"
       ></ion-alert>
-      <ion-button id:"botao" (click)="setOpen(true)" color="primary" expand="block">Senha Geral</ion-button>
+
+      <ion-button (click)="abrirAlertaGeral()" color="primary" expand="block">Senha Geral</ion-button>
       <ion-alert
-        [isOpen]="isAlertOpen"
-        header="A Short Title Is Best"
-        subHeader="A Sub Header Is Optional"
+        [isOpen]="isAlertGeralOpen"
+        header="Senha N° 334"
+        subHeader="Tipo de senha: Senha Geral"
         message="Seu número será chamado em instantes."
         [buttons]="alertButtons"
-        (didDismiss)="setOpen(false)"
+        (didDismiss)="isAlertGeralOpen = false"
       ></ion-alert>
-      <ion-button id:"botao" (click)="setOpen(true)" color="success" expand="block">Retirada de Exames</ion-button>
+
+      <ion-button (click)="abrirAlertaExames()" color="success" expand="block">Retirada de Exames</ion-button>
       <ion-alert
-        [isOpen]="isAlertOpen"
-        header="A Short Title Is Best"
-        subHeader="A Sub Header Is Optional"
+        [isOpen]="isAlertExamesOpen"
+        header="Senha N° 336"
+        subHeader="Tipo de senha: Retirada de exames"
         message="Seu número será chamado em instantes."
         [buttons]="alertButtons"
-        (didDismiss)="setOpen(false)"
+        (didDismiss)="isAlertExamesOpen = false"
       ></ion-alert>
       
 
