@@ -1,12 +1,79 @@
-.container{
-    display: grid;
-}
-.spList{
-    background-color: rgb(255, 255, 97);
-}
-.sgList{
-    background-color: rgb(103, 103, 255);
-}
-.reList{
-    background-color: rgb(44, 185, 44);
-}
+.container-superior {
+    display: flex; /* Usar flexbox para organizar os containers horizontalmente */
+    flex-direction: column; /* Empilhar os containers verticalmente */
+  }
+  
+  .senha-container {
+    display: flex; /* Habilitar flexbox dentro de cada container para o conteúdo */
+    align-items: center; /* Alinhar os itens verticalmente ao centro (opcional) */
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    text-align: left;
+    margin-bottom: 10px;
+    width: 100%; /* Ocupar 100% da largura do pai */
+    box-sizing: border-box; /* Incluir padding e border na largura total */
+  
+    div {
+      margin-right: 10px; /* Espaçamento entre os textos dentro do container */
+    }
+  
+    &.senha-prioritaria {
+      background-color: gold !important;
+      color: black !important;
+    }
+  
+    &.senha-geral {
+      background-color: cornflowerblue !important;
+    }
+  
+    &.senha-exames {
+      background-color: limegreen !important;
+    }
+  
+    &.senha-off {
+      background-color: gray !important;
+    }
+  }
+  
+  ion-list {
+    margin-top: 20px; /* Espaçamento entre os containers superiores e a lista */
+  }
+  
+  ion-item {
+    --inner-padding-end: 0px; /* Remover padding direito do ion-item */
+    --inner-padding-start: 0px; /* Remover padding esquerdo do ion-item */
+  }
+  
+  .senha-exibida {
+    display: flex; /* Usar flexbox para o conteúdo */
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    text-align: left;
+    margin-bottom: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  
+    div {
+      margin-right: 10px;
+    }
+  
+    &.prioritaria {
+      background-color: gold !important;
+      color: black !important;
+    }
+  
+    &.geral {
+      background-color: cornflowerblue !important;
+    }
+  
+    &.exames {
+      background-color: limegreen !important;
+    }
+  
+    &.off {
+      background-color: gray !important;
+    }
+  }

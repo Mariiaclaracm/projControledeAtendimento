@@ -13,42 +13,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card color="warning">
-    <ion-card-header>
-      <ion-card-title>Senha N° : 333</ion-card-title>
-      <ion-card-subtitle>Tipo => SP</ion-card-subtitle>
-    </ion-card-header>
   
-    <ion-card-content> Guichê : 01 </ion-card-content>
-    <ion-card-content> Tempo:3:48</ion-card-content>
-  </ion-card> 
-  <ion-card color="primary">
-    <ion-card-header>
-      <ion-card-title>Senha N° : 157</ion-card-title>
-      <ion-card-subtitle>Tipo => SG</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content> Guichê : 02 </ion-card-content>
-    <ion-card-content> Tempo:1:23</ion-card-content>
-  </ion-card>
-  <ion-card color="success">
-    <ion-card-header>
-      <ion-card-title>Senha N° : 345</ion-card-title>
-      <ion-card-subtitle>Tipo => SE</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content> Guichê : 03 </ion-card-content>
-    <ion-card-content> Tempo:0:56</ion-card-content>
-  </ion-card>
-  <ion-card color="medium">
-    <ion-card-header>
-      <ion-card-title>Senha N° : _____</ion-card-title>
-      <ion-card-subtitle>Tipo => Off</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content> Guichê : 04 </ion-card-content>
-    <ion-card-content> Tempo:0:00</ion-card-content>
-  </ion-card>
+  <ion-list>
+    <ion-item *ngFor="let senha of listaDeSenhasExibida">
+      <div class="senha-exibida" [ngClass]="{'prioritaria': senha.tipo === 'SP',
+                                              'geral': senha.tipo === 'SG',
+                                              'exames': senha.tipo === 'SE',
+                                              'off': senha.tipo === 'Off'}">
+        <div>Senha N°: {{ senha.numero !== null ? senha.numero : '' }}</div>
+        <div>Tipo => {{ senha.tipo }}</div>
+        <div>Guichê: {{ senha.tipo === 'SP' ? '01' : (senha.tipo === 'SG' ? '02' : (senha.tipo === 'SE' ? '03' : '04')) }}</div>
+      </div>
+    </ion-item>
+  </ion-list>
 
 
 

@@ -5,7 +5,7 @@ import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  styleUrls: ['./tab1.page.scss'],
   standalone: false
 })
 export class Tab1Page {
@@ -17,7 +17,7 @@ export class Tab1Page {
     {
       text: 'Verificar',
       handler: () => {
-        this.navCtrl.navigateForward('/tabs/tab4'); 
+        this.navCtrl.navigateForward('/tabs/tab4');
       }
     }
   ];
@@ -28,24 +28,30 @@ export class Tab1Page {
 
   constructor(
     private bidingService: BidingService,
-    private navCtrl: NavController // Injeta o NavController
+    private navCtrl: NavController
   ) {
     this.bidingService.varivavelTeste = "Shalala";
   }
 
   abrirAlertaPrioritaria() {
     this.senhaPrioritaria++;
-    this.isAlertPrioritariaOpen = true;
+    this.bidingService.setSenhaPrioritaria(this.senhaPrioritaria);
+    this.bidingService.adicionarNovaSenha({ numero: this.senhaPrioritaria, tipo: 'SP' }); // Adiciona à lista
+    this.isAlertPrioritariaOpen = true; // Manter ou remover conforme necessidade
   }
 
   abrirAlertaGeral() {
     this.senhaGeral++;
-    this.isAlertGeralOpen = true;
+    this.bidingService.setSenhaGeral(this.senhaGeral);
+    this.bidingService.adicionarNovaSenha({ numero: this.senhaGeral, tipo: 'SG' }); // Adiciona à lista
+    this.isAlertGeralOpen = true; // Manter ou remover conforme necessidade
   }
 
   abrirAlertaExames() {
     this.retiradaExames++;
-    this.isAlertExamesOpen = true;
+    this.bidingService.setSenhaExames(this.retiradaExames);
+    this.bidingService.adicionarNovaSenha({ numero: this.retiradaExames, tipo: 'SE' }); // Adiciona à lista
+    this.isAlertExamesOpen = true; // Manter ou remover conforme necessidade
   }
 
   setOpen(isOpen: boolean) {
