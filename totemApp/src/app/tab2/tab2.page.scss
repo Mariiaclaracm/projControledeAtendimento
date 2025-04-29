@@ -1,21 +1,21 @@
 .container-superior {
-    display: flex; /* Usar flexbox para organizar os containers horizontalmente */
-    flex-direction: column; /* Empilhar os containers verticalmente */
+    display: flex; 
+    flex-direction: column; 
   }
   
   .senha-container {
-    display: flex; /* Habilitar flexbox dentro de cada container para o conteúdo */
-    align-items: center; /* Alinhar os itens verticalmente ao centro (opcional) */
+    display: flex; 
+    align-items: center; 
     padding: 15px;
     border-radius: 5px;
     color: white;
     text-align: left;
     margin-bottom: 10px;
-    width: 100%; /* Ocupar 100% da largura do pai */
-    box-sizing: border-box; /* Incluir padding e border na largura total */
+    width: 100%; 
+    box-sizing: border-box; 
   
     div {
-      margin-right: 10px; /* Espaçamento entre os textos dentro do container */
+      margin-right: 10px;
     }
   
     &.senha-prioritaria {
@@ -37,16 +37,15 @@
   }
   
   ion-list {
-    margin-top: 20px; /* Espaçamento entre os containers superiores e a lista */
-  }
+    margin-top: 20px; }
   
   ion-item {
-    --inner-padding-end: 0px; /* Remover padding direito do ion-item */
-    --inner-padding-start: 0px; /* Remover padding esquerdo do ion-item */
+    --inner-padding-end: 0px; 
+    --inner-padding-start: 0px; 
   }
   
   .senha-exibida {
-    display: flex; /* Usar flexbox para o conteúdo */
+    display: flex; 
     align-items: center;
     padding: 15px;
     border-radius: 5px;
@@ -76,4 +75,37 @@
     &.off {
       background-color: gray !important;
     }
+
+    .filtros {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+      
+        ion-button {
+          --padding-start: 10px;
+          --padding-end: 10px;
+           
+        }
+      
+        ion-button.active {
+          --background: var(--ion-color-primary); 
+          color: white;
+        }
+      }
+
+      .senha-exibida {
+        // ... seus estilos existentes ...
+      
+        &.cancelada {
+          background-color: lightgray !important;
+          color: darkgray !important;
+          opacity: 0.7;
+        }
+      
+        .status-cancelada {
+          color: red;
+          font-weight: bold;
+          margin-left: 10px; /* Ajuste a distância conforme necessário */
+        }
+      }
   }

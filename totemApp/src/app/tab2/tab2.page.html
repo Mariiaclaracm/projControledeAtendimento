@@ -13,16 +13,21 @@
     </ion-toolbar>
   </ion-header>
 
+  <div class="filtros">
+    <ion-button (click)="aplicarFiltro('todos')" [class.active]="filtroAtual === 'todos'">Todos</ion-button>
+    <ion-button (click)="aplicarFiltro('SP')" [class.active]="filtroAtual === 'SP'">Prioritárias</ion-button>
+    <ion-button (click)="aplicarFiltro('SG')" [class.active]="filtroAtual === 'SG'">Gerais</ion-button>
+    <ion-button (click)="aplicarFiltro('SE')" [class.active]="filtroAtual === 'SE'">Exames</ion-button>
+  </div>
   
   <ion-list>
-    <ion-item *ngFor="let senha of listaDeSenhasExibida">
+    <ion-item *ngFor="let senha of listaFiltrada">
       <div class="senha-exibida" [ngClass]="{'prioritaria': senha.tipo === 'SP',
                                               'geral': senha.tipo === 'SG',
-                                              'exames': senha.tipo === 'SE',
-                                              'off': senha.tipo === 'Off'}">
+                                              'exames': senha.tipo === 'SE'}"
+                                              (click)="navegarParaAtendente(senha)">
         <div>Senha N°: {{ senha.numero !== null ? senha.numero : '' }}</div>
-        <div>Tipo => {{ senha.tipo }}</div>
-        <div>Guichê: {{ senha.tipo === 'SP' ? '01' : (senha.tipo === 'SG' ? '02' : (senha.tipo === 'SE' ? '03' : '04')) }}</div>
+        <div>{{ senha.tipo === 'SP' ? 'Prioritária' : (senha.tipo === 'SG' ? 'Geral' : (senha.tipo === 'SE' ? 'Exames' : senha.tipo)) }}</div>
       </div>
     </ion-item>
   </ion-list>

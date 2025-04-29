@@ -1,35 +1,32 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Atendente (Guichê 01)
-    </ion-title>
+    <ion-title>Atendente (Guichê 01)</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div *ngIf="senhaRecebida">
+    <div class="senha-container" [ngClass]="{'prioritaria': senhaRecebida.tipo === 'SP',
+                                                'geral': senhaRecebida.tipo === 'SG',
+                                                'exames': senhaRecebida.tipo === 'SE',
+                                                'cancelada': senhaRecebida.status === 'cancelada'}">
+      <div>Senha N°: {{ senhaRecebida.numero }}</div>
+      <div>Tipo => {{ senhaRecebida.tipo === 'SP' ? 'Prioritária' : (senhaRecebida.tipo === 'SG' ? 'Geral' : 'Exames') }}</div>
+      <div>Guichê: {{ guicheAtual }}</div>
+    </div>
 
-  <ion-card color="warning">
-    <ion-card-header>
-      <ion-card-title>Senha N° : 333</ion-card-title>
-      <ion-card-subtitle>Tipo => SP</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content> Guichê : 01 </ion-card-content>
-  </ion-card>
-  <div class="container">
-  <ion-card color="light">
-    <ion-card-header>
-      <ion-card-title>Tempo:</ion-card-title>
-      <ion-card-title>3:48</ion-card-title>
-    </ion-card-header>
-  </ion-card>
-  
-  <ion-button>Chamar Proximo n°</ion-button>
-  <ion-button>Encerrar Atendimento</ion-button>
+    <ion-item>
+      <ion-label position="floating">Alterar Guichê</ion-label>
+      <ion-input type="number" [(ngModel)]="novoGuiche"></ion-input>
+    </ion-item>
+
+
+
+    <ion-button expand="block" color="primary" (click)="encerrarAtendimento()">ENCERRAR ATENDIMENTO</ion-button>
+    <ion-button expand="block" color="danger" (click)="cancelarAtendimento()">CANCELAR</ion-button>
+  </div>
+
+  <div *ngIf="!senhaRecebida">
+    <p>Nenhuma senha em atendimento.</p>
   </div>
 </ion-content>

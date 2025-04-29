@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BidingService } from "../services/biding.service";
 import { Subscription } from 'rxjs';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -9,6 +10,7 @@ import { Subscription } from 'rxjs';
   standalone: false,
 })
 export class Tab2Page implements OnInit, OnDestroy {
+  filtroAtual: string = 'todos';
   listaDeSenhasExibida: { numero: number | null; tipo: string }[] = [];
   private listaDeSenhasSubscription: Subscription | undefined;
 
@@ -19,7 +21,7 @@ export class Tab2Page implements OnInit, OnDestroy {
   private senhaGeralSubscription: Subscription | undefined;
   private senhaExamesSubscription: Subscription | undefined;
 
-  constructor(private bidingService: BidingService) { }
+  constructor(private bidingService: BidingService, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.senhaPrioritariaSubscription = this.bidingService.senhaPrioritaria$.subscribe(senha => this.senhaPrioritariaAtual = senha);
@@ -38,6 +40,21 @@ export class Tab2Page implements OnInit, OnDestroy {
     if (this.senhaExamesSubscription) this.senhaExamesSubscription.unsubscribe();
     if (this.listaDeSenhasSubscription) this.listaDeSenhasSubscription.unsubscribe();
   }
-
-  // Remove as funções gerarNovaSenhaPrioritaria, gerarNovaSenhaGeral, gerarNovaSenhaExames, simularOff
+  aplicarFiltro(tipo: string) {
+    this.filtroAtual = tipo;
+  }
+  
+  get listaFiltrada() {
+    if (this.filtroAtual === 'todos') {
+      return this.listaDeSenhasExibida;
+    } else {
+      return this.listaDeSenhasExibida.filter(senha => senha.tipo === this.filtroAtual);
+    }
+  }
+ 
+  navegarParaAtendente(senhaSelecionada: { numero: number | null; tipo: string }) {
+    this.bidingService.setSenhaEmAtendimento(senhaSelecionada);
+    this.navCtrl.navigateForward('/tabs/tab3');
+  }
+    
 }
