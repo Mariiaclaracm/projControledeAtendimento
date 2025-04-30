@@ -1,68 +1,38 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Próximos Atendimentos</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-card *ngIf="senhaAtendida && guicheAtendimento">
-    <ion-card-header>
-      <ion-card-title>Último Atendimento:</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Senha N°: {{ senhaAtendida.numero }} - Tipo: {{ senhaAtendida.tipo === 'SP' ? 'Prioritária' : (senhaAtendida.tipo === 'SG' ? 'Geral' : 'Exames') }} - Guichê: {{ guicheAtendimento }}
-    </ion-card-content>
-  </ion-card>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <ion-label> Senha: {{ historicoAtual.atual }} </ion-label>
+        <ion-label>Tipo: {{ historicoAtual.tipo }}</ion-label>
+        <div>Guichê: {{ guicheAtualChamado }}</div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Próximos Atendimentos:</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-list-header>
-          <ion-label>Próximas Prioritárias</ion-label>
-        </ion-list-header>
-        <ion-item *ngFor="let atendimento of proximosPrioritarios">
-          <ion-label>
-            <h2>Senha N°: {{ atendimento.numero }}</h2>
-            <p>Guichê: {{ atendimento.guiche }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item *ngIf="proximosPrioritarios.length === 0">
-          <ion-label>Nenhuma senha prioritária na fila.</ion-label>
-        </ion-item>
-      </ion-list>
+  <ion-list class="prioritaria">
+    <ion-item >
+      <ion-label>
+        <h2>Última prioritaria chamada: {{ historicoPrioritarias.atual }}</h2>
+        <p>Guichê: {{ historicoPrioritarias.guiche }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-      <ion-list>
-        <ion-list-header>
-          <ion-label>Próximas Gerais</ion-label>
-        </ion-list-header>
-        <ion-item *ngFor="let atendimento of proximosGerais">
-          <ion-label>
-            <h2>Senha N°: {{ atendimento.numero }}</h2>
-            <p>Guichê: {{ atendimento.guiche }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item *ngIf="proximosGerais.length === 0">
-          <ion-label>Nenhuma senha geral na fila.</ion-label>
-        </ion-item>
-      </ion-list>
+  <ion-list class="geral">
+    <ion-item>
+      <ion-label>
+        <h2>Última Geral Chamada: {{ historicoGerais.atual }}</h2>
+        <p>Guichê: {{ historicoGerais.guiche }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-      <ion-list>
-        <ion-list-header>
-          <ion-label>Próximos Exames</ion-label>
-        </ion-list-header>
-        <ion-item *ngFor="let atendimento of proximosExames">
-          <ion-label>
-            <h2>Senha N°: {{ atendimento.numero }}</h2>
-            <p>Guichê: {{ atendimento.guiche }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item *ngIf="proximosExames.length === 0">
-          <ion-label>Nenhuma senha de exames na fila.</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <ion-list class="exames">
+    <ion-item>
+      <ion-label >
+        <h2>Última Exame Chamada: {{ historicoExames.atual }}</h2>
+        <p>Guichê: {{ historicoExames.guiche }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

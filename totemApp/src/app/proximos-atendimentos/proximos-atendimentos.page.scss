@@ -1,12 +1,14 @@
-.container{
-    display: grid;
-}
-.spList{
-    background-color: rgb(255, 255, 97);
-}
-.sgList{
-    background-color: rgb(103, 103, 255);
-}
-.reList{
-    background-color: rgb(44, 185, 44);
-}
+.prioritaria {
+    background-color: var(--ion-color-warning); // Cor amarela
+    color: var(--ion-color-warning-contrast);
+  }
+  
+.geral {
+    background-color: var(--ion-color-primary); // Cor azul
+    color: var(--ion-color-primary-contrast);
+  }
+  
+.exames {
+    background-color: var(--ion-color-success); // Cor verde
+    color: var(--ion-color-success-contrast);
+  }

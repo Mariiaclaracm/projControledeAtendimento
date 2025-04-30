@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+interface AtendimentoEncerrado {
+  senha: number | null;
+  tipo: string | undefined;
+  guiche: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +27,10 @@ export class BidingService {
 
   private _senhaEmAtendimento = new BehaviorSubject<any>(null);
   public senhaEmAtendimento$ = this._senhaEmAtendimento.asObservable();
-  
+
+  private _guicheEmAtendimento = new BehaviorSubject<string | null>(null);
+  public guicheEmAtendimento$ = this._guicheEmAtendimento.asObservable();
+
   private _guicheAtual = new BehaviorSubject<{ [tipo: string]: string }>({
     'SP': '01',
     'SG': '02',
@@ -30,6 +39,8 @@ export class BidingService {
   });
   public guicheAtual$ = this._guicheAtual.asObservable();
 
+  private _historicoAtendimentosEncerrados = new BehaviorSubject<AtendimentoEncerrado[]>([]);
+  public historicoAtendimentosEncerrados$ = this._historicoAtendimentosEncerrados.asObservable();
 
   constructor() { }
 
@@ -61,7 +72,6 @@ export class BidingService {
     const listaAtual = this._listaDeSenhas.getValue();
     const novaLista = [...listaAtual, { ...novaSenha, status: 'pendente' }];
     this._listaDeSenhas.next(novaLista);
-    this._listaDeSenhas.next(this._listaDeSenhas.getValue()); // Força uma nova emissão
   }
 
   setSenhaEmAtendimento(senha: any) {
@@ -103,5 +113,29 @@ export class BidingService {
     }
   }
 
-}
+  adicionarAtendimentoEncerrado(atendimento: AtendimentoEncerrado) {
+    const historicoAtual = this._historicoAtendimentosEncerrados.getValue();
+    this._historicoAtendimentosEncerrados.next([...historicoAtual, atendimento]);
+    console.log('Histórico de Atendimentos Encerrados:', this._historicoAtendimentosEncerrados.getValue());
+  }
 
+  getProximasSenhas(tipo: string, quantidade: number = 2): { numero: number | null; tipo: string }[] {
+    const listaAtual = this._listaDeSenhas.getValue();
+    const pendentesDoTipo = listaAtual.filter(senha => senha.tipo.startsWith(tipo) && senha.status === 'pendente');
+    return pendentesDoTipo.slice(0, quantidade);
+  }
+
+  getUltimoAtendimentoEncerrado(tipo: string): AtendimentoEncerrado | undefined {
+    const historico = this._historicoAtendimentosEncerrados.getValue();
+    const atendimentosDoTipo = historico.filter(atendimento => atendimento.tipo?.startsWith(tipo));
+    return atendimentosDoTipo[atendimentosDoTipo.length - 1];
+  }
+
+  setGuicheEmAtendimento(guiche: string | null) {
+    this._guicheEmAtendimento.next(guiche);
+  }
+
+  getGuicheEmAtendimento(): string | null {
+    return this._guicheEmAtendimento.value;
+  }
+}

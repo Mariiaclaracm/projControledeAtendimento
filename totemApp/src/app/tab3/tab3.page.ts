@@ -9,14 +9,14 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['tab3.page.scss'],
   standalone: false,
 })
-export class Tab3Page implements OnInit, OnDestroy{
+export class Tab3Page implements OnInit, OnDestroy {
   senhaRecebida: any;
   private senhaEmAtendimentoSubscription: Subscription | undefined;
-  guicheAtual: string = ''; 
+  guicheAtual: string = '';
   novoGuiche: number | null = null;
 
-  constructor(private bidingService: BidingService,private navCtrl: NavController) {}
-  
+  constructor(private bidingService: BidingService, private navCtrl: NavController) {}
+
   ngOnInit() {
     this.senhaEmAtendimentoSubscription = this.bidingService.senhaEmAtendimento$.subscribe(senha => {
       this.senhaRecebida = senha;
@@ -25,7 +25,8 @@ export class Tab3Page implements OnInit, OnDestroy{
       } else {
         this.guicheAtual = '';
       }
-      console.log('Senha em Atendimento:', this.senhaRecebida);
+      console.log('Senha em Atendimento na Tab 3:', this.senhaRecebida);
+      console.log('Guichê Atual na Tab 3 (OnInit):', this.guicheAtual);
     });
   }
 
@@ -45,15 +46,23 @@ export class Tab3Page implements OnInit, OnDestroy{
       }
       this.novoGuiche = null;
       console.log('Atendimento encerrado para a senha:', this.senhaRecebida, 'no guichê:', this.guicheAtual);
+
+      this.bidingService.setGuicheEmAtendimento(this.guicheAtual); // Atualiza o BehaviorSubject
+
       this.navCtrl.navigateForward('/tabs/tab4', {
         state: {
           senhaAtendida: this.senhaRecebida,
           guicheAtendimento: this.guicheAtual
         }
       });
+      this.bidingService.adicionarAtendimentoEncerrado({
+        senha: this.senhaRecebida?.numero,
+        tipo: this.senhaRecebida?.tipo,
+        guiche: this.guicheAtual,
+      });
       this.bidingService.marcarSenhaComoAtendida(this.senhaRecebida);
-      this.bidingService.setSenhaEmAtendimento(null); // Limpa a senha em atendimento no serviço
-      this.senhaRecebida = null; // Limpa a senha recebida no componente
+      this.bidingService.setSenhaEmAtendimento(null);
+      this.senhaRecebida = null;
     } else {
       console.log('Nenhum guichê digitado para encerrar o atendimento.');
     }
@@ -63,11 +72,10 @@ export class Tab3Page implements OnInit, OnDestroy{
     if (this.senhaRecebida) {
       const senhaCancelada = { ...this.senhaRecebida, status: 'cancelada' };
       this.bidingService.atualizarSenhaNaLista(senhaCancelada);
-      this.bidingService.setSenhaEmAtendimento(null); 
+      this.bidingService.setSenhaEmAtendimento(null);
       console.log('Atendimento cancelado para a senha:', this.senhaRecebida);
     } else {
       console.log('Nenhuma senha selecionada para cancelar.');
     }
   }
 }
-
